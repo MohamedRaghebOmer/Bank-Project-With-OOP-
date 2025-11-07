@@ -4,6 +4,7 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include <iomanip>
+#include "clsListUsersScreen.h"
 using namespace std;
 
 class clsManageUsersScreen : public clsScreen
@@ -26,10 +27,10 @@ class clsManageUsersScreen : public clsScreen
         ShowManageUsersMenue();
     }
 
+
     static void _ShowListUsersScreen()
     {
-        cout << "\nList Users Screen Will Be Here.\n";
-
+        clsListUsersScreen::ShowUsersList();
     }
 
     static void _ShowAddNewUserScreen()
@@ -53,6 +54,7 @@ class clsManageUsersScreen : public clsScreen
     {
         cout << "\nFind User Screen Will Be Here.\n";
     }
+
 
     static void _PerformManageUsersMenueOption(enManageUsersMenueOptions ManageUsersMenueOption)
     {

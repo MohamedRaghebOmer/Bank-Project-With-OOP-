@@ -132,6 +132,7 @@
     <ClInclude Include="clsDeleteClientScreen.h" />
     <ClInclude Include="clsDepositScreen.h" />
     <ClInclude Include="clsFindClientScreen.h" />
+    <ClInclude Include="clsListUsersScreen.h" />
     <ClInclude Include="clsMainMenueScreen.h" />
     <ClInclude Include="clsManageUsersScreen.h" />
     <ClInclude Include="clsPeriod.h" />
