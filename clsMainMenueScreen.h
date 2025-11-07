@@ -5,6 +5,7 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsClientListScreen.h"
+#include "clsAddNewClientScreen.h"
 using namespace std;
 
 class clsMainMenueScreen : public clsScreen
@@ -37,7 +38,7 @@ private:
 
     static void _ShowAddNewClientScreen()
     {
-        cout << "Show add new client screen will be here :-)" << endl;
+        clsAddNewClientScreen::ShowAddNewClientScreen();
     }
 
     static void _ShowDeleteClientScreen()
