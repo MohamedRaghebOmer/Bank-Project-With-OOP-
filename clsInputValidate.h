@@ -169,6 +169,31 @@ public:
         return Number;
     }
 
+    static short ReadShortNumberBiggerThan(short MinValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        short Number = ReadShortNumber(EnterNumberMessage, FailMessage);
+        while (Number <= MinValue)
+        {
+            cout << FailMessage;
+            Number = ReadShortNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+	}
+
+    static short ReadShortNumberSmallerThan(short MaxValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        short Number = ReadShortNumber(EnterNumberMessage, FailMessage);
+        while (Number >= MaxValue)
+        {
+            cout << FailMessage;
+            Number = ReadShortNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+	}
 
     // ----------------------Int Numbers---------------------
     static int ReadIntNumber(const string& EnterNumberMessage = "Enter number: ",
@@ -277,6 +302,33 @@ public:
         return Number;
     }
 
+    static int ReadIntNumberSmallerThan(int MaxValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        int Number = ReadIntNumber(EnterNumberMessage, FailMessage);
+        while (Number >= MaxValue)
+        {
+            cout << FailMessage;
+            Number = ReadIntNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+    }
+
+    static int ReadIntNumberBiggerThan(int MinValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        int Number = ReadIntNumber(EnterNumberMessage, FailMessage);
+        while (Number <= MinValue)
+        {
+            cout << FailMessage;
+            Number = ReadIntNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+	}
+
+
     //--------Float numbers--------
     static float ReadFloatNumber(const string& EnterNumberMessage =
         "Enter number: ", const string& FailMessage =
@@ -384,6 +436,32 @@ public:
             }
         }
 
+        return Number;
+    }
+
+    static float ReadFloatNumberSmallerThan(float MaxValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        float Number = ReadFloatNumber(EnterNumberMessage, FailMessage);
+        while (Number >= MaxValue)
+        {
+            cout << FailMessage;
+            Number = ReadFloatNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+    }
+
+    static float ReadFloatNumberBiggerThan(float MinValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        float Number = ReadFloatNumber(EnterNumberMessage, FailMessage);
+        while (Number <= MinValue)
+        {
+            cout << FailMessage;
+            Number = ReadFloatNumber(EnterNumberMessage, FailMessage);
+        }
         return Number;
     }
 
@@ -498,6 +576,33 @@ public:
 
         return Number;
     }
+
+    static double ReadDblNumberSmallerThan(double MaxValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        double Number = ReadDblNumber(EnterNumberMessage, FailMessage);
+        while (Number >= MaxValue)
+        {
+            cout << FailMessage;
+            Number = ReadDblNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+	}
+
+    static double ReadDblNumberBiggerThan(double MinValue,
+        const string& EnterNumberMessage = "Enter number: ",
+        const string& FailMessage = "Invalid number, please try again.\n\n")
+    {
+        double Number = ReadDblNumber(EnterNumberMessage, FailMessage);
+        while (Number <= MinValue)
+        {
+            cout << FailMessage;
+            Number = ReadDblNumber(EnterNumberMessage, FailMessage);
+        }
+        return Number;
+    }
+
 
 
     // ----------------------ReadDate---------------------
