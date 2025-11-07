@@ -15,7 +15,8 @@ private:
     {
         bool LoginFaild = false;
 
-        string Username, Password;
+        string Username = "", Password = "";
+
         do
         {
 
@@ -24,11 +25,9 @@ private:
                 cout << "Invlaid Username/Password!\n\n";
             }
 
-            cout << "Enter Username: ";
-            cin >> Username;
-
-            cout << "Enter Password: ";
-            cin >> Password;
+			// Read Username and Password
+			Username = clsInputValidate::ReadString("Enter Your Username: ");
+            Password = clsInputValidate::ReadString("Enter Your Password: ");
 
             CurrentUser = clsUser::Find(Username, Password);
 
