@@ -29,5 +29,22 @@ protected:
 
 		}
 	}
+	
+	static bool CheckAccessRights(clsUser::enPermissions Permission)
+	{
+
+		if (!CurrentUser.CheckAccessPermission(Permission))
+		{
+			_DrawScreenHeader("Access Denied Contact your admin");
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+
+	}
+
+
 };
 
