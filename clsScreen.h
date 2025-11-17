@@ -17,7 +17,7 @@ protected:
 				cout << "\t\t[" << SubTitle << "]" << endl;
 			}
 
-			// Udate User Name and date display
+			// Update User Name and date display
 			cout << endl;
 			if (CurrentUser.UserName != "")
 				cout << "User: " << CurrentUser.UserName << endl;
@@ -39,9 +39,9 @@ protected:
 			// Udate User Name and date display
 			cout << endl;
 			if (CurrentUser.UserName != "")
-				cout << "\t\t\t\t\tUser: " << CurrentUser.UserName << endl;
+				cout << "\t\t\t\tUser: " << CurrentUser.UserName << endl;
 
-			cout << "\t\t\t\t\tDate: " << clsDate::DateToString(clsDate()) << endl;
+			cout << "\t\t\t\tDate: " << clsDate::DateToString(clsDate()) << endl;
 			// End Udate User Name and date display
 
 			cout << "\t\t\t\t---------------------------------------------------" << endl;
