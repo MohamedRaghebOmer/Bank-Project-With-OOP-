@@ -12,6 +12,7 @@
 #include "clsTransactionsScreen.h"
 #include "clsManageUsersScreen.h"
 #include "Global.h"
+#include "clsLoginRegisterScreen.h"
 
 class clsMainMenueScreen : public clsScreen
 {
@@ -19,14 +20,14 @@ private:
 
     static short _ReadMainMenueChoose()
     {
-        return clsInputValidate::ReadShortNumberBetween(1, 8, "Choose what do you want to do [1 to 8]: ");
+        return clsInputValidate::ReadShortNumberBetween(1, 9, "Choose what do you want to do [1 to 9]: ");
     }
 
     enum enMainMenueOptions
     {
         eClientsList = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7, eExit = 8
+        eManageUsers = 7, eLoginRegister = 8, eExit = 9
     };
 
     static void _GoToBackToMainMenue()
@@ -76,6 +77,11 @@ private:
         cout << "End Screen Will be here...\n";
 
     }*/
+
+    static void _ShowLoginRegisterScreen()
+    {
+        clsLoginRegisterScreen::ShowLoginRegisterScreen();
+    }
 
     static void _Logout()
     {
@@ -136,6 +142,13 @@ private:
             _GoToBackToMainMenue();
             break;
         }
+        case eLoginRegister:
+        {
+            system("cls");
+            _ShowLoginRegisterScreen();
+            _GoToBackToMainMenue();
+            break;
+        }
         case eExit:
         {
             system("cls");
@@ -163,9 +176,11 @@ public:
         cout << "\t[5] Find Client." << endl;
         cout << "\t[6] Transactions." << endl;
         cout << "\t[7] Manage Users." << endl;
-        cout << "\t[8] Logout." << endl;
+        cout << "\t[8] Login Register." << endl;
+        cout << "\t[9] Logout." << endl;
         cout << "===========================================" << endl;
         _PerformMainMenueChoose((enMainMenueOptions)_ReadMainMenueChoose());
     }
+
 };
 

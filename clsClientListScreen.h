@@ -41,9 +41,7 @@ public:
         _DrawScreenHeader(Title, SubTitle, true);
 
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________\n" << endl;
-
+        cout << setw(8) << left << "" << "\n\t________________________________________________________________________________________________\n\n";
         cout << setw(8) << left << "" << "| " << left << setw(15) << "Accout Number";
         cout << "| " << left << setw(20) << "Client Name";
         cout << "| " << left << setw(12) << "Phone";
@@ -57,7 +55,7 @@ public:
             cout << "\t\t\t\tNo Clients Available In the System!";
         else
 
-            for (clsBankClient Client : vClients)
+            for (clsBankClient& Client : vClients)
             {
 
                 PrintClientRecordLine(Client);
