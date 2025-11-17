@@ -152,11 +152,34 @@ private:
             SeperatorInFile + to_string(Permissions);
     }
 
+    struct stLoginRegisterRecord; // This is a declaration for comming sturct
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(const string& Line)
+    {
+        vector <string> vRegisterRecord = clsString::Split(Line, "#//#");
+
+        stLoginRegisterRecord Record;
+
+        Record.DateAndTime = vRegisterRecord[0];
+        Record.Username = vRegisterRecord[1];
+        Record.Password = vRegisterRecord[2];
+        Record.Permissions = stoi(vRegisterRecord[3]);
+
+        return Record;
+    }
+
 public:
 
     enum enPermissions {
         eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
-        pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64
+        pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64, pLoginRegister = 128
+    };
+
+    struct stLoginRegisterRecord
+    {
+        string DateAndTime;
+        string Username;
+        string Password;
+        short Permissions;
     };
 
     clsUser(enMode Mode, const string& FirstName, const string& LastName,
@@ -363,7 +386,6 @@ public:
             return true;
         else
             return false;
-
     }
 
     void RegisterLogin(const string FileName = "LoginRegister.txt")
@@ -378,6 +400,29 @@ public:
             LoginFile << LoginRecord << endl;
             LoginFile.close();
         }
+    }
+
+    static vector <stLoginRegisterRecord> GetLoginRegisterList()
+    {
+        vector <stLoginRegisterRecord> vRegistersList;
+
+        fstream MyFile;
+        MyFile.open("LoginRegister.txt", ios::in);
+
+        if (MyFile.is_open())
+        {
+            string CurrentRegisterLine = "";
+
+            while (getline(MyFile, CurrentRegisterLine))
+            {
+                stLoginRegisterRecord OneRegister = _ConvertLoginRegisterLineToRecord(CurrentRegisterLine);
+                vRegistersList.push_back(OneRegister);
+            }
+
+            MyFile.close();
+        }
+
+        return vRegistersList;
     }
 
 };
