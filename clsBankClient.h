@@ -149,8 +149,32 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
-public:
+    string _prepareTransferLine(clsBankClient& TransferTo, float amount, const string& Seprator = "#//#")
+    {
+        return clsDate::GetSystemDateAndTime() + Seprator + AccountNumber() +
+            Seprator + TransferTo.AccountNumber() + Seprator + to_string(amount) +
+            Seprator + to_string(AccountBalance) + Seprator +
+            to_string(TransferTo.AccountBalance) + Seprator + CurrentUser.UserName;
 
+    }
+
+    void _registerTransfer(clsBankClient& TransferTo, float amount)
+    {
+        fstream myFile;
+        myFile.open("transfer_log.txt", ios::out | ios::app);
+
+        if (myFile.is_open())
+        {
+            string registerLine = _prepareTransferLine(TransferTo, amount);
+
+            myFile << registerLine << endl;
+
+            myFile.close();
+        }
+
+    }
+
+public:
 
     clsBankClient(enMode Mode, const string& FirstName, const string& LastName,
         string Email, const string& Phone, const string& AccountNumber, const string& PinCode,
@@ -406,9 +430,12 @@ public:
         {
             DestinationClient.Deposit(amount);
             Withdraw(amount);
+            _registerTransfer(DestinationClient, amount);
             return true;
         }
+
     }
+
 
 };
 
