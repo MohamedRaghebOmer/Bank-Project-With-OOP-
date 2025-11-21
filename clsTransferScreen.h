@@ -31,11 +31,9 @@ private:
 	}
 
 public:
+
 	static void ShowTransferScreen()
 	{
-		// Check access rights in the next lesson
-
-
 		clsScreen::_DrawScreenHeader("Transfer Screen");
 
 		clsBankClient TransferFrom = clsBankClient::Find(_ReadAccountNumber("Please enter account number to transfer from: "));
@@ -75,11 +73,10 @@ public:
 			cout << "Receiver card after transfering:" << endl;
 			_PrintClient(TransferTo);
 
-			// Transfering is Done :-)
 		}
-
-		
+	
 	}
+
 
 };
 
