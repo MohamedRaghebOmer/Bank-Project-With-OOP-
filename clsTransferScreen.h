@@ -5,6 +5,19 @@ class clsTransferScreen : public clsScreen
 {
 private:
 
+	static string _ReadAccountNumber(string Message = "Please enter account number to transfer from: ")
+	{
+		string AccountNumber = clsInputValidate::ReadString(Message);
+		
+		while (!clsBankClient::IsClientExist(AccountNumber))
+		{
+			cout << "Account number you entered doesn't exist, please try again.\n\n";
+			AccountNumber = clsInputValidate::ReadString(Message);
+		}
+
+		return AccountNumber;
+	}
+
 	static void _PrintClient(clsBankClient& Client)
 	{
 
@@ -25,70 +38,48 @@ public:
 
 		clsScreen::_DrawScreenHeader("Transfer Screen");
 
-		// Read account number and validate it's existance 
-		string AccountNumber1 = clsInputValidate::ReadString("Please enter account number to transfer from: ");
-		while (!clsBankClient::IsClientExist(AccountNumber1))
-		{
-			cout << "Account number you entered doesn't exist, please try again.\n\n";
-			AccountNumber1 = clsInputValidate::ReadString("Please enter account number to transfer from: ");
-
-		}
-
-
-		// find client and print his card
-		clsBankClient TransferFrom = clsBankClient::Find(AccountNumber1);
+		clsBankClient TransferFrom = clsBankClient::Find(_ReadAccountNumber("Please enter account number to transfer from: "));
 		_PrintClient(TransferFrom);
 
+		cout << endl;
+		
+		clsBankClient TransferTo = clsBankClient::Find(_ReadAccountNumber("Please enter account number to transfer to: "));
 
-		// Read the account number that we want to transfer to 
-		string AccountNumber2 = clsInputValidate::ReadString("\nPlease enter account number to transfer to: ");
-		while (!clsBankClient::IsClientExist(AccountNumber2) || AccountNumber2 == AccountNumber1)
+		while (TransferTo.AccountNumber() == TransferFrom.AccountNumber())
 		{
-			if (AccountNumber1 == AccountNumber2)
-				cout << "Can't transfer to the same account number, please enter another account number.\n\n";
-			else
-				cout << "Account number you entered doesn't exist, please try again.\n\n";
-
-			AccountNumber2 = clsInputValidate::ReadString("Please enter account number to transfer to: ");
+			cout << "Can't transfer to the same account number.\n\n";
+			TransferTo = clsBankClient::Find(_ReadAccountNumber("Please enter account number to transfer to: "));
 		}
 
-
-		// find client and print his card
-		clsBankClient TransferTo = clsBankClient::Find(AccountNumber2);
 		_PrintClient(TransferTo);
 
-
 		// Read valid transfer amount
-		float TransferAmount = clsInputValidate::ReadPositiveFloat(false, "\nEnter transfer amount: ", "Amount must be greater than Zero, please try again\n\n");
-		while (TransferAmount > TransferFrom.AccountBalance)
-		{
-			cout << "Amount exceeds the avalible balance, please enter a valid amount.\n\n" << endl;
-			TransferAmount = clsInputValidate::ReadPositiveFloat(false, "Enter transfer amount: ", "Amount must be greater than Zero, please try again\n\n");
-
-		}
+		float TransferAmount = clsInputValidate::ReadFloatNumberBetween
+		(1, TransferFrom.AccountBalance, "\nEnter transfer amount: ", 
+			true, "Amount must be greater than Zero, please try again\n\n");
 
 
-		// if sure do transfering
 		char sure = 'n';
 		cout << "Are you sure, do you want to perform this operation? [Y|N]: ";
 		cin >> sure;
+
 		if (sure == 'y' || sure == 'Y')
 		{
-			TransferFrom.AccountBalance -= TransferAmount;
-			TransferFrom.Save();
+			TransferFrom.transfer(TransferTo, TransferAmount);
+			
+			cout << "\nTransfer Done Successfly." << endl;
 
-			TransferTo.AccountBalance += TransferAmount;
-			TransferTo.Save();
+			cout << "\nSender card after transfering:" << endl;
+			_PrintClient(TransferFrom);
+
+			cout << "Receiver card after transfering:" << endl;
+			_PrintClient(TransferTo);
+
+			// Transfering is Done :-)
 		}
 
-
-		cout << "Sender card after transfering:" << endl;
-		_PrintClient(TransferFrom);
-
-		cout << "Receiver card after transfering:" << endl;
-		_PrintClient(TransferTo);
-
-		// Transfering is Done :-)
+		
 	}
+
 };
 
